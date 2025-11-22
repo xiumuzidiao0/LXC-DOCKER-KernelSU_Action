@@ -44,11 +44,13 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         git clone ${{ env.KERNEL_SOURCE }} -b ${{ env.KERNEL_SOURCE_BRANCH }} android-kernel --depth=1
 
-    - name: 拉取wifi模块-仅vince安卓16
+    - name: 拉取wifi模块和其它2个模块-仅vince安卓16
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         cd android-kernel
         git clone --depth=1 https://github.com/Mi-Thorium/vendor_qcom_opensource_wlan_prima.git -b wlan/LA.UM.9.6.4/mithorium/master drivers/staging/prima
+        git clone --depth=1 https://github.com/AmiaAlt-Miscellaneous/techpack_xiaomi-titanium.git -b bak techpack/xiaomi-titanium
+        git clone --depth=1 https://github.com/AmiaAlt-Miscellaneous/kernel_techpack_audio-legacy.git -b audio-4.9 techpack/audio-legacy
 
     - name: 开启lxc和docker配置
       if: env.ENABLE_LXC_DOCKER == 'true'
